@@ -27,17 +27,171 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonSiguiente = new javax.swing.JButton();
+        jButtonAtras = new javax.swing.JButton();
+        jButtonPrimero = new javax.swing.JButton();
+        jButtonUltimo = new javax.swing.JButton();
+        jButtonAñadir = new javax.swing.JButton();
+        jButtonQuitar = new javax.swing.JButton();
+        jButtonActualizar = new javax.swing.JButton();
+        jLabelTitulo = new javax.swing.JLabel();
+        jLabelProductores = new javax.swing.JLabel();
+        jLabelGenero = new javax.swing.JLabel();
+        jLabelAnyo = new javax.swing.JLabel();
+        jLabelTemporadas = new javax.swing.JLabel();
+        jLabelNota = new javax.swing.JLabel();
+        jTextFieldTitulo = new javax.swing.JTextField();
+        jTextFieldProductores = new javax.swing.JTextField();
+        jTextFieldGenero = new javax.swing.JTextField();
+        jTextFieldAño = new javax.swing.JTextField();
+        jTextFieldTemporadas = new javax.swing.JTextField();
+        jSliderNota = new javax.swing.JSlider();
+        jMenuBarArchivo = new javax.swing.JMenuBar();
+        jMenuArchivo = new javax.swing.JMenu();
+        jMenuItemAbrir = new javax.swing.JMenuItem();
+        jMenuItemGuardarComo = new javax.swing.JMenuItem();
+        jMenuItemSalir = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButtonSiguiente.setText("▶");
+
+        jButtonAtras.setText("◀");
+
+        jButtonPrimero.setText("⏮");
+
+        jButtonUltimo.setText("⏭");
+
+        jButtonAñadir.setText("➕");
+
+        jButtonQuitar.setText("➖");
+
+        jButtonActualizar.setText("🔄");
+
+        jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabelTitulo.setText("Título:");
+
+        jLabelProductores.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabelProductores.setText("Productores:");
+
+        jLabelGenero.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabelGenero.setText("Género:");
+
+        jLabelAnyo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabelAnyo.setText("Año:");
+
+        jLabelTemporadas.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabelTemporadas.setText("Temporadas:");
+
+        jLabelNota.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabelNota.setText("Nota:");
+
+        jSliderNota.setMajorTickSpacing(5);
+        jSliderNota.setMaximum(10);
+        jSliderNota.setMinorTickSpacing(1);
+        jSliderNota.setPaintLabels(true);
+        jSliderNota.setPaintTicks(true);
+        jSliderNota.setSnapToTicks(true);
+
+        jMenuArchivo.setText("Archivo");
+
+        jMenuItemAbrir.setText("Abrir...");
+        jMenuArchivo.add(jMenuItemAbrir);
+
+        jMenuItemGuardarComo.setText("Guardar como...");
+        jMenuArchivo.add(jMenuItemGuardarComo);
+
+        jMenuItemSalir.setText("Salir...");
+        jMenuArchivo.add(jMenuItemSalir);
+
+        jMenuBarArchivo.add(jMenuArchivo);
+
+        setJMenuBar(jMenuBarArchivo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonPrimero, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonQuitar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabelAnyo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelGenero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelProductores, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextFieldProductores)
+                                .addComponent(jTextFieldGenero)
+                                .addComponent(jTextFieldAño)
+                                .addComponent(jTextFieldTitulo)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabelNota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelTemporadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(24, 24, 24)
+                                    .addComponent(jSliderNota, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(17, 17, 17)
+                                    .addComponent(jTextFieldTemporadas))))))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSiguiente)
+                    .addComponent(jButtonAtras)
+                    .addComponent(jButtonPrimero)
+                    .addComponent(jButtonUltimo)
+                    .addComponent(jButtonAñadir)
+                    .addComponent(jButtonQuitar)
+                    .addComponent(jButtonActualizar))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTitulo)
+                    .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelProductores)
+                    .addComponent(jTextFieldProductores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelGenero)
+                    .addComponent(jTextFieldGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAnyo)
+                    .addComponent(jTextFieldAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTemporadas)
+                    .addComponent(jTextFieldTemporadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelNota)
+                    .addComponent(jSliderNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,5 +233,29 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonActualizar;
+    private javax.swing.JButton jButtonAtras;
+    private javax.swing.JButton jButtonAñadir;
+    private javax.swing.JButton jButtonPrimero;
+    private javax.swing.JButton jButtonQuitar;
+    private javax.swing.JButton jButtonSiguiente;
+    private javax.swing.JButton jButtonUltimo;
+    private javax.swing.JLabel jLabelAnyo;
+    private javax.swing.JLabel jLabelGenero;
+    private javax.swing.JLabel jLabelNota;
+    private javax.swing.JLabel jLabelProductores;
+    private javax.swing.JLabel jLabelTemporadas;
+    private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JMenu jMenuArchivo;
+    private javax.swing.JMenuBar jMenuBarArchivo;
+    private javax.swing.JMenuItem jMenuItemAbrir;
+    private javax.swing.JMenuItem jMenuItemGuardarComo;
+    private javax.swing.JMenuItem jMenuItemSalir;
+    private javax.swing.JSlider jSliderNota;
+    private javax.swing.JTextField jTextFieldAño;
+    private javax.swing.JTextField jTextFieldGenero;
+    private javax.swing.JTextField jTextFieldProductores;
+    private javax.swing.JTextField jTextFieldTemporadas;
+    private javax.swing.JTextField jTextFieldTitulo;
     // End of variables declaration//GEN-END:variables
 }
