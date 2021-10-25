@@ -5,17 +5,40 @@
  */
 package Vista;
 
+import Controlador.Controlador;
+import Modelo.Serie;
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ángel Torada
  */
 public class Interfaz extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Interfaz
-     */
+    Serie serie = new Serie();
+    Controlador c = new Controlador();
+    private javax.swing.JFileChooser jFileChooser;
+    private java.io.File archivo;
+
     public Interfaz() {
         initComponents();
+        try {
+            actualiza(c.primero());
+        } catch (Exception e) {
+            jTextFieldTitulo.setText("");
+            jTextFieldProductores.setText("");
+            jTextFieldGenero.setText("");
+            jTextFieldAño.setText("");
+            jTextFieldTemporadas.setText("");
+            jSliderNota.setValue(5);
+        }
+
+        jFileChooser = new javax.swing.JFileChooser();
+        jFileChooser.showOpenDialog(this);
+        archivo = jFileChooser.getSelectedFile();
+
+        c.abrirArchivo(archivo);
     }
 
     /**
@@ -55,18 +78,53 @@ public class Interfaz extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonSiguiente.setText("▶");
+        jButtonSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSiguienteActionPerformed(evt);
+            }
+        });
 
         jButtonAtras.setText("◀");
+        jButtonAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtrasActionPerformed(evt);
+            }
+        });
 
         jButtonPrimero.setText("⏮");
+        jButtonPrimero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPrimeroActionPerformed(evt);
+            }
+        });
 
         jButtonUltimo.setText("⏭");
+        jButtonUltimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUltimoActionPerformed(evt);
+            }
+        });
 
         jButtonAñadir.setText("➕");
+        jButtonAñadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAñadirActionPerformed(evt);
+            }
+        });
 
         jButtonQuitar.setText("➖");
+        jButtonQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonQuitarActionPerformed(evt);
+            }
+        });
 
         jButtonActualizar.setText("🔄");
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarActionPerformed(evt);
+            }
+        });
 
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabelTitulo.setText("Título:");
@@ -102,6 +160,11 @@ public class Interfaz extends javax.swing.JFrame {
         jMenuArchivo.add(jMenuItemGuardarComo);
 
         jMenuItemSalir.setText("Salir...");
+        jMenuItemSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSalirActionPerformed(evt);
+            }
+        });
         jMenuArchivo.add(jMenuItemSalir);
 
         jMenuBarArchivo.add(jMenuArchivo);
@@ -197,6 +260,113 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonPrimeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrimeroActionPerformed
+        try {
+            serie = c.primero();
+            actualiza(serie);
+        } catch (Exception e) {
+            jTextFieldTitulo.setText("");
+            jTextFieldProductores.setText("");
+            jTextFieldGenero.setText("");
+            jTextFieldAño.setText("");
+            jTextFieldTemporadas.setText("");
+            jSliderNota.setValue(5);
+        }
+    }//GEN-LAST:event_jButtonPrimeroActionPerformed
+
+    private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
+        try {
+            serie = c.anterior();
+            actualiza(serie);
+        } catch (Exception e) {
+            jTextFieldTitulo.setText("");
+            jTextFieldProductores.setText("");
+            jTextFieldGenero.setText("");
+            jTextFieldAño.setText("");
+            jTextFieldTemporadas.setText("");
+            jSliderNota.setValue(5);
+        }
+    }//GEN-LAST:event_jButtonAtrasActionPerformed
+
+    private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
+        try {
+            serie = c.siguiente();
+            actualiza(serie);
+        } catch (Exception e) {
+            jTextFieldTitulo.setText("");
+            jTextFieldProductores.setText("");
+            jTextFieldGenero.setText("");
+            jTextFieldAño.setText("");
+            jTextFieldTemporadas.setText("");
+            jSliderNota.setValue(5);
+        }
+    }//GEN-LAST:event_jButtonSiguienteActionPerformed
+
+    private void jButtonUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUltimoActionPerformed
+        try {
+            serie = c.ultimo();
+            actualiza(serie);
+        } catch (Exception e) {
+            jTextFieldTitulo.setText("");
+            jTextFieldProductores.setText("");
+            jTextFieldGenero.setText("");
+            jTextFieldAño.setText("");
+            jTextFieldTemporadas.setText("");
+            jSliderNota.setValue(5);
+        }
+    }//GEN-LAST:event_jButtonUltimoActionPerformed
+
+    private void jButtonQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitarActionPerformed
+        try {
+            System.out.println("Entra en el try\n" + c.getPosicion());
+            c.eliminar();
+            serie = c.primero();
+            actualiza(serie);
+        } catch (Exception e) {
+            jTextFieldTitulo.setText("");
+            jTextFieldProductores.setText("");
+            jTextFieldGenero.setText("");
+            jTextFieldAño.setText("");
+            jTextFieldTemporadas.setText("");
+            jSliderNota.setValue(5);
+        }
+    }//GEN-LAST:event_jButtonQuitarActionPerformed
+
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        serie = llenaSerie();
+        c.actualizar(serie);
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
+
+    private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jMenuItemSalirActionPerformed
+
+    private void jButtonAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirActionPerformed
+        Añadir dialogAñadir = new Añadir(this, true);
+        dialogAñadir.setVisible(true);
+    }//GEN-LAST:event_jButtonAñadirActionPerformed
+
+    private Serie llenaSerie() {
+        try {
+            if (jTextFieldTitulo.getText() == null || "".equals(jTextFieldTitulo.getText())
+                    || jTextFieldProductores.getText() == null || "".equals(jTextFieldProductores.getText())
+                    || jTextFieldGenero.getText() == null || "".equals(jTextFieldGenero.getText())
+                    || Integer.valueOf(jTextFieldAño.getText()) < 0
+                    || Integer.valueOf(jTextFieldTemporadas.getText()) < 0) {
+                JOptionPane.showMessageDialog(null, "Datos Incorrectos");
+                serie = null;
+                return serie;
+            } else {
+                Serie libroLlenaLibro = new Serie(jTextFieldTitulo.getText(), jTextFieldGenero.getText(), jTextFieldProductores.getText(), Integer.valueOf(jTextFieldAño.getText()), Integer.valueOf(jTextFieldTemporadas.getText()), jSliderNota.getValue());
+                return libroLlenaLibro;
+            }
+        } catch (HeadlessException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Datos Incorrectos");
+            serie = null;
+            return serie;
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -232,6 +402,14 @@ public class Interfaz extends javax.swing.JFrame {
         });
     }
 
+    private void actualiza(Serie primera) {
+        jTextFieldTitulo.setText("");
+        jTextFieldProductores.setText("");
+        jTextFieldGenero.setText("");
+        jTextFieldAño.setText("");
+        jTextFieldTemporadas.setText("");
+        jSliderNota.setValue(primera.getValoraciónPersonal());
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonAtras;

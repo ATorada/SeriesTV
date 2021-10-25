@@ -3,6 +3,7 @@ package Controlador;
 import Modelo.Acceso;
 import Modelo.ListaSeries;
 import Modelo.Serie;
+import java.io.File;
 
 /*
 *
@@ -75,5 +76,9 @@ public class Controlador {
     public void actualizar(Serie libro) {
         lista.actualizar(libro, posicion);
         Acceso.guardarLista(lista);
+    }
+
+    public void abrirArchivo(File archivo) {
+
     }
 }

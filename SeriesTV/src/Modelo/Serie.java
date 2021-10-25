@@ -43,7 +43,7 @@ public class Serie {
         this.productores = Productores;
         this.anyo = Año;
         this.temporadas = Temporadas;
-        this.valoraciónPersonal = ComprobarValoracion(0);
+        this.valoraciónPersonal = ComprobarValoracion(Valoración_Personal);
     }
 
     public String getTitulo() {
