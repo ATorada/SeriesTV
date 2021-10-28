@@ -16,23 +16,17 @@ import javax.swing.JOptionPane;
  */
 public class Añadir extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Añadir
-     */
+    //Variables
+    //Crea e instancia la serie que se va a añadir
     private Serie serie = new Serie();
+    //Crea el controlador que se instancia en el constructor y que ya tiene la lista cargada previamente
     private static Controlador c;
 
     public Añadir(java.awt.Frame parent, boolean modal, Controlador c) {
         super(parent, modal);
         initComponents();
         this.c = c;
-        jTextFieldTitulo.setText("");
-        jTextFieldProductores.setText("");
-        jTextFieldGenero.setText("");
-        jTextFieldAño.setText("");
-        jTextFieldTemporadas.setText("");
         jSliderNota.setValue(5);
-
     }
 
     /**
@@ -182,17 +176,28 @@ public class Añadir extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Botón de añadir, mira que todos los datos estén correctamente antes de añadirla.
     private void jButtonAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirActionPerformed
         serie = llenaSerie();
-        c.nuevo(serie);
-        dispose();
-
+        if (serie != null) {
+            c.nuevo(serie);
+            dispose();
+        } else {
+            jTextFieldTitulo.setText("");
+            jTextFieldProductores.setText("");
+            jTextFieldGenero.setText("");
+            jTextFieldAño.setText("");
+            jTextFieldTemporadas.setText("");
+            jSliderNota.setValue(5);
+        }
     }//GEN-LAST:event_jButtonAñadirActionPerformed
 
+    //Botón de salir
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //Método que se encarga de llenar devolver una serie con sus datos si está todo bien
     private Serie llenaSerie() {
         try {
             if (jTextFieldTitulo.getText() == null || "".equals(jTextFieldTitulo.getText())

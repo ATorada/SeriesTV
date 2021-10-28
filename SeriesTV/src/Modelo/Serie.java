@@ -21,6 +21,7 @@ import java.io.Serializable;
  */
 public class Serie implements Serializable {
 
+    //Atributos de la clase serie
     private String titulo;
     private String genero;
     private String productores;
@@ -28,6 +29,7 @@ public class Serie implements Serializable {
     private int temporadas;
     private int valoraciónPersonal;
 
+    //Constructor por defecto
     public Serie() {
 
         this.titulo = "";
@@ -39,6 +41,7 @@ public class Serie implements Serializable {
 
     }
 
+    //Contrustor de atributos
     public Serie(String Título, String Género, String Productores, int Año, int Temporadas, int Valoración_Personal) {
         this.titulo = Título;
         this.genero = Género;
@@ -48,6 +51,7 @@ public class Serie implements Serializable {
         this.valoraciónPersonal = ComprobarValoracion(Valoración_Personal);
     }
 
+    //Getters y Setters
     public String getTitulo() {
         return titulo;
     }
@@ -96,6 +100,8 @@ public class Serie implements Serializable {
         this.valoraciónPersonal = valoraciónPersonal;
     }
 
+    //Método que se encarga de comprobar que el número pasado sea un valor correcto
+    //Este método parece redundante pero le da mucha escalabilidad a la clase y nos permite usarla en otros sitios
     private int ComprobarValoracion(int valoracion) {
         if (valoracion < 0 || valoracion > 10) {
             return 5;
@@ -104,6 +110,7 @@ public class Serie implements Serializable {
         }
     }
 
+    //Método ToString
     @Override
     public String toString() {
         return "Serie{" + "titulo=" + titulo + ", genero=" + genero + ", productores=" + productores + ", anyo=" + anyo + ", temporadas=" + temporadas + ", valoraci\u00f3nPersonal=" + valoraciónPersonal + '}';

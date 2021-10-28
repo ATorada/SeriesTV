@@ -26,8 +26,10 @@ import java.io.ObjectOutputStream;
  */
 public class Acceso {
 
+    //Variable que prepara un archivo File que se instanciará más tarde y en el que se guardarán los datos
     private static File f;
 
+    //Método que se encarga de guardar la lista en el archivo seleccionado
     public static void guardarLista(ListaSeries lista) {
 
         try {
@@ -40,6 +42,7 @@ public class Acceso {
         }
     }
 
+    //Método que se encarga de cargar la lista
     public static ListaSeries cargarLista() {
         ListaSeries lista = new ListaSeries();
         ObjectInputStream ois = null;
@@ -55,6 +58,7 @@ public class Acceso {
         }
     }
 
+    //Método que se encarga de cargar el Archivo seleccionado por el usuario
     public static ListaSeries cargarArchivo(File archivo) {
         ListaSeries lista = new ListaSeries();
         f = archivo;
@@ -71,6 +75,7 @@ public class Acceso {
         }
     }
 
+    //Método que se encarga de guardar la lista pasada por parámetro en el archivo seleccionado por el usuario
     public static void guardarArchivo(File archivo, ListaSeries lista) {
         try {
             FileOutputStream fos = new FileOutputStream(archivo);

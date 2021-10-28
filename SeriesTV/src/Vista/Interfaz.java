@@ -16,31 +16,48 @@ import javax.swing.JOptionPane;
  * @author Ángel Torada
  */
 public class Interfaz extends javax.swing.JFrame {
+    //Variables necesarias
 
+    //Objeto serie del que se mostrará la información
     Serie serie = new Serie();
+    //Objeto de la clase Controlador que se encargará de realizar los métodos pertinentes
     Controlador c = new Controlador();
+    //Objeto jFileChooser que nos permitirá la selección de un archivo
     private javax.swing.JFileChooser jFileChooser;
+    //El Archivo seleccionado
     private java.io.File archivo;
 
     public Interfaz() {
         initComponents();
 
+        //Instancia de jFileChooser que muestra el selector del archivo a utilizar
+        //Si se da a cancelar se cierra el programa
+        //Si se selecciona un archivo sin Array, avisará y preguntará al usuario si quiere sobrescribirlo
+        //Selector
         jFileChooser = new javax.swing.JFileChooser();
-        jFileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        jFileChooser.setApproveButtonText("Abrir");
         int eleccion = jFileChooser.showOpenDialog(this);
         if (eleccion == JFileChooser.CANCEL_OPTION) {
             System.exit(0);
         }
-        archivo = jFileChooser.getSelectedFile();
 
+        //Lectura del archivo
+        archivo = jFileChooser.getSelectedFile();
         c.abrirArchivo(archivo);
 
+        //Comprobación del archivo
         try {
             actualiza(c.primero());
         } catch (Exception e) {
-
+            int seleccion = JOptionPane.showConfirmDialog(rootPane, """
+                                                    Est\u00e1s a punto de abrir un archivo que no contiene series dentro
+                                                                       \u00bfEst\u00e1s seguro de que quieres usarlo?
+                                                                        (Si tiene contenido se sobrescribir\u00e1)""", "¿Estás seguro?", JOptionPane.YES_NO_OPTION);
+            if (seleccion != JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
         }
-
     }
 
     /**
@@ -272,6 +289,7 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Botón que carga y muestra el primer objeto del array
     private void jButtonPrimeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrimeroActionPerformed
         try {
             serie = c.primero();
@@ -286,6 +304,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonPrimeroActionPerformed
 
+    //Botón que carga y muestra el objeto anterior del objeto actual en el Array
     private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
         try {
             serie = c.anterior();
@@ -300,6 +319,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonAtrasActionPerformed
 
+    //Botón que carga y muestra el objeto siguiente del objeto actual del array
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
         try {
             serie = c.siguiente();
@@ -314,6 +334,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSiguienteActionPerformed
 
+    //Botón que carga y muestra el último objeto del array
     private void jButtonUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUltimoActionPerformed
         try {
             serie = c.ultimo();
@@ -328,6 +349,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonUltimoActionPerformed
 
+    //Botón que borra el objeto actual del Array
     private void jButtonQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitarActionPerformed
         try {
             System.out.println("Entra en el try\n" + c.getPosicion());
@@ -344,6 +366,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonQuitarActionPerformed
 
+    //Botón que actualiza los valores el objeto actual del Array
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         try {
             serie = llenaSerie();
@@ -358,10 +381,12 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
+    //Botón del menú desplegable que permite salir de la aplicación al usuario
     private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalirActionPerformed
         dispose();
     }//GEN-LAST:event_jMenuItemSalirActionPerformed
 
+    //Botón que permite Añadir un nuevo objeto al Array mediante un JDialog
     private void jButtonAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirActionPerformed
         Añadir dialogAñadir = new Añadir(this, true, c);
         dialogAñadir.setVisible(true);
@@ -369,20 +394,24 @@ public class Interfaz extends javax.swing.JFrame {
         actualiza(serie);
     }//GEN-LAST:event_jButtonAñadirActionPerformed
 
+    //Botón del menú desplegable que permite abrir un selector de archivo para cargar otro Array
     private void jMenuItemAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAbrirActionPerformed
-
+        jFileChooser.setApproveButtonText("Abrir");
         jFileChooser.showOpenDialog(this);
         archivo = jFileChooser.getSelectedFile();
 
         c.abrirArchivo(archivo);
     }//GEN-LAST:event_jMenuItemAbrirActionPerformed
 
+    //Botón del menú desplegable que permite abrir un selector de archivo para guardar el Array actual
     private void jMenuItemGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGuardarComoActionPerformed
+        jFileChooser.setApproveButtonText("Guardar");
         jFileChooser.showOpenDialog(this);
         archivo = jFileChooser.getSelectedFile();
         c.guardarArchivo(archivo);
     }//GEN-LAST:event_jMenuItemGuardarComoActionPerformed
 
+    //Método que se engarga de devolver los datos en los textfields a la hora de actualizar (Filtra errores de formato)
     private Serie llenaSerie() {
         try {
             if (jTextFieldTitulo.getText() == null || "".equals(jTextFieldTitulo.getText())
@@ -402,6 +431,16 @@ public class Interfaz extends javax.swing.JFrame {
             serie = null;
             return serie;
         }
+    }
+
+    //Método que se encarga de actualizar los textfields a la serie actual
+    private void actualiza(Serie serie) {
+        jTextFieldTitulo.setText(serie.getTitulo());
+        jTextFieldProductores.setText(serie.getProductores());
+        jTextFieldGenero.setText(serie.getGenero());
+        jTextFieldAño.setText(String.valueOf(serie.getAnyo()));
+        jTextFieldTemporadas.setText(String.valueOf(serie.getTemporadas()));
+        jSliderNota.setValue(serie.getValoraciónPersonal());
     }
 
     /**
@@ -439,14 +478,6 @@ public class Interfaz extends javax.swing.JFrame {
         });
     }
 
-    private void actualiza(Serie serie) {
-        jTextFieldTitulo.setText(serie.getTitulo());
-        jTextFieldProductores.setText(serie.getProductores());
-        jTextFieldGenero.setText(serie.getGenero());
-        jTextFieldAño.setText(String.valueOf(serie.getAnyo()));
-        jTextFieldTemporadas.setText(String.valueOf(serie.getTemporadas()));
-        jSliderNota.setValue(serie.getValoraciónPersonal());
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonAtras;
