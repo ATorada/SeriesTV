@@ -38,6 +38,7 @@ public class Controlador {
     }
 
     public Serie primero() {
+
         posicion = 0;
         return lista.getSerie(posicion);
     }
@@ -58,11 +59,14 @@ public class Controlador {
     }
 
     public Serie ultimo() {
+
         posicion = lista.longitud() - 1;
         return lista.getSerie(posicion);
+
     }
 
     public void nuevo(Serie libro) {
+
         lista.setSerie(libro);
         posicion = lista.longitud() - 1;
         Acceso.guardarLista(lista);
@@ -79,6 +83,11 @@ public class Controlador {
     }
 
     public void abrirArchivo(File archivo) {
-
+        lista = Acceso.cargarArchivo(archivo);
     }
+
+    public void guardarArchivo(File archivo) {
+        Acceso.guardarArchivo(archivo, lista);
+    }
+
 }

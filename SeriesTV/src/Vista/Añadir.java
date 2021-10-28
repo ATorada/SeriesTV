@@ -20,11 +20,12 @@ public class Añadir extends javax.swing.JDialog {
      * Creates new form Añadir
      */
     private Serie serie = new Serie();
-    private Controlador c = new Controlador();
+    private static Controlador c;
 
-    public Añadir(java.awt.Frame parent, boolean modal) {
+    public Añadir(java.awt.Frame parent, boolean modal, Controlador c) {
         super(parent, modal);
         initComponents();
+        this.c = c;
         jTextFieldTitulo.setText("");
         jTextFieldProductores.setText("");
         jTextFieldGenero.setText("");
@@ -97,6 +98,11 @@ public class Añadir extends javax.swing.JDialog {
         });
 
         jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,12 +184,14 @@ public class Añadir extends javax.swing.JDialog {
 
     private void jButtonAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirActionPerformed
         serie = llenaSerie();
-        try {
-            c.nuevo(serie);
-        } catch (Exception e) {
+        c.nuevo(serie);
+        dispose();
 
-        }
     }//GEN-LAST:event_jButtonAñadirActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private Serie llenaSerie() {
         try {
@@ -236,7 +244,7 @@ public class Añadir extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Añadir dialog = new Añadir(new javax.swing.JFrame(), true);
+                Añadir dialog = new Añadir(new javax.swing.JFrame(), true, c);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

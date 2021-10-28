@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /*
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  * @version 1.0
  * @date 20 oct 2021
  */
-public class ListaSeries {
+public class ListaSeries implements Serializable {
 
     private ArrayList<Serie> listaSeries;
 
@@ -39,21 +40,21 @@ public class ListaSeries {
         return listaSeries.get(p);
     }
 
-    public void setSerie(Serie libro) {
-        listaSeries.add(libro);
+    public void setSerie(Serie serie) {
+        listaSeries.add(serie);
     }
 
     public int longitud() {
         return listaSeries.size();
     }
 
-    public void actualizar(Serie libro, int posicion) {
-        listaSeries.get(posicion).setTitulo(libro.getTitulo());
-        listaSeries.get(posicion).setGenero(libro.getGenero());
-        listaSeries.get(posicion).setProductores(libro.getProductores());
-        listaSeries.get(posicion).setAnyo(libro.getAnyo());
-        listaSeries.get(posicion).setTemporadas(libro.getTemporadas());
-        listaSeries.get(posicion).setValoraciónPersonal(libro.getValoraciónPersonal());
+    public void actualizar(Serie serie, int posicion) {
+        listaSeries.get(posicion).setTitulo(serie.getTitulo());
+        listaSeries.get(posicion).setGenero(serie.getGenero());
+        listaSeries.get(posicion).setProductores(serie.getProductores());
+        listaSeries.get(posicion).setAnyo(serie.getAnyo());
+        listaSeries.get(posicion).setTemporadas(serie.getTemporadas());
+        listaSeries.get(posicion).setValoraciónPersonal(serie.getValoraciónPersonal());
     }
 
     public void eliminar(int posicion) {

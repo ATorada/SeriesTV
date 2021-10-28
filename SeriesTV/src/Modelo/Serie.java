@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.io.Serializable;
+
 /*
 *
 * Serie.java
@@ -17,7 +19,7 @@ package Modelo;
  * @version 1.0
  * @date 20 oct 2021
  */
-public class Serie {
+public class Serie implements Serializable {
 
     private String titulo;
     private String genero;

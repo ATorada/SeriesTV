@@ -26,9 +26,10 @@ import java.io.ObjectOutputStream;
  */
 public class Acceso {
 
-    private static File f = new File("Series.dat");
+    private static File f;
 
     public static void guardarLista(ListaSeries lista) {
+
         try {
             FileOutputStream fos = new FileOutputStream(f);
             try ( ObjectOutputStream oos = new ObjectOutputStream(fos)) {
@@ -48,9 +49,36 @@ public class Acceso {
             lista = (ListaSeries) ois.readObject();
             ois.close();
         } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Fallo al guardar el fichero.");
+        } finally {
+            return lista;
+        }
+    }
+
+    public static ListaSeries cargarArchivo(File archivo) {
+        ListaSeries lista = new ListaSeries();
+        f = archivo;
+        ObjectInputStream ois = null;
+        try {
+            FileInputStream fis = new FileInputStream(archivo);
+            ois = new ObjectInputStream(fis);
+            lista = (ListaSeries) ois.readObject();
+            ois.close();
+        } catch (IOException | ClassNotFoundException e) {
             System.out.println("Fallo al abrir el fichero.");
         } finally {
             return lista;
+        }
+    }
+
+    public static void guardarArchivo(File archivo, ListaSeries lista) {
+        try {
+            FileOutputStream fos = new FileOutputStream(archivo);
+            try ( ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                oos.writeObject(lista);
+            }
+        } catch (IOException e) {
+            System.out.println("Fallo al guardar el fichero.");
         }
     }
 

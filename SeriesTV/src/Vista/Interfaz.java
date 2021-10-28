@@ -8,6 +8,7 @@ package Vista;
 import Controlador.Controlador;
 import Modelo.Serie;
 import java.awt.HeadlessException;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,22 +24,23 @@ public class Interfaz extends javax.swing.JFrame {
 
     public Interfaz() {
         initComponents();
-        try {
-            actualiza(c.primero());
-        } catch (Exception e) {
-            jTextFieldTitulo.setText("");
-            jTextFieldProductores.setText("");
-            jTextFieldGenero.setText("");
-            jTextFieldAño.setText("");
-            jTextFieldTemporadas.setText("");
-            jSliderNota.setValue(5);
-        }
 
         jFileChooser = new javax.swing.JFileChooser();
-        jFileChooser.showOpenDialog(this);
+        jFileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        int eleccion = jFileChooser.showOpenDialog(this);
+        if (eleccion == JFileChooser.CANCEL_OPTION) {
+            System.exit(0);
+        }
         archivo = jFileChooser.getSelectedFile();
 
         c.abrirArchivo(archivo);
+
+        try {
+            actualiza(c.primero());
+        } catch (Exception e) {
+
+        }
+
     }
 
     /**
@@ -154,9 +156,19 @@ public class Interfaz extends javax.swing.JFrame {
         jMenuArchivo.setText("Archivo");
 
         jMenuItemAbrir.setText("Abrir...");
+        jMenuItemAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAbrirActionPerformed(evt);
+            }
+        });
         jMenuArchivo.add(jMenuItemAbrir);
 
         jMenuItemGuardarComo.setText("Guardar como...");
+        jMenuItemGuardarComo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGuardarComoActionPerformed(evt);
+            }
+        });
         jMenuArchivo.add(jMenuItemGuardarComo);
 
         jMenuItemSalir.setText("Salir...");
@@ -333,8 +345,17 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonQuitarActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
-        serie = llenaSerie();
-        c.actualizar(serie);
+        try {
+            serie = llenaSerie();
+            c.actualizar(serie);
+        } catch (Exception e) {
+            jTextFieldTitulo.setText("");
+            jTextFieldProductores.setText("");
+            jTextFieldGenero.setText("");
+            jTextFieldAño.setText("");
+            jTextFieldTemporadas.setText("");
+            jSliderNota.setValue(5);
+        }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalirActionPerformed
@@ -342,9 +363,25 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemSalirActionPerformed
 
     private void jButtonAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirActionPerformed
-        Añadir dialogAñadir = new Añadir(this, true);
+        Añadir dialogAñadir = new Añadir(this, true, c);
         dialogAñadir.setVisible(true);
+        serie = c.anterior();
+        actualiza(serie);
     }//GEN-LAST:event_jButtonAñadirActionPerformed
+
+    private void jMenuItemAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAbrirActionPerformed
+
+        jFileChooser.showOpenDialog(this);
+        archivo = jFileChooser.getSelectedFile();
+
+        c.abrirArchivo(archivo);
+    }//GEN-LAST:event_jMenuItemAbrirActionPerformed
+
+    private void jMenuItemGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGuardarComoActionPerformed
+        jFileChooser.showOpenDialog(this);
+        archivo = jFileChooser.getSelectedFile();
+        c.guardarArchivo(archivo);
+    }//GEN-LAST:event_jMenuItemGuardarComoActionPerformed
 
     private Serie llenaSerie() {
         try {
@@ -402,13 +439,13 @@ public class Interfaz extends javax.swing.JFrame {
         });
     }
 
-    private void actualiza(Serie primera) {
-        jTextFieldTitulo.setText("");
-        jTextFieldProductores.setText("");
-        jTextFieldGenero.setText("");
-        jTextFieldAño.setText("");
-        jTextFieldTemporadas.setText("");
-        jSliderNota.setValue(primera.getValoraciónPersonal());
+    private void actualiza(Serie serie) {
+        jTextFieldTitulo.setText(serie.getTitulo());
+        jTextFieldProductores.setText(serie.getProductores());
+        jTextFieldGenero.setText(serie.getGenero());
+        jTextFieldAño.setText(String.valueOf(serie.getAnyo()));
+        jTextFieldTemporadas.setText(String.valueOf(serie.getTemporadas()));
+        jSliderNota.setValue(serie.getValoraciónPersonal());
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
